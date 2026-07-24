@@ -1,2 +1,36 @@
 # Image Caption Generator
-### It  is a process of recognizing the context of an image and annotating it with relevant captions using deep learning and computer vision. It includes labeling an image with English keywords with the help of datasets provided during model training. The imagenet dataset trains the CNN model called Xception. Xception is responsible for image feature extraction. These extracted features will be fed to the LSTM model, which generates the image caption.
+
+A deep learning system that recognizes the context of an image and generates a natural
+language caption describing it, combining a CNN for visual feature extraction with an
+LSTM for language generation.
+
+## How It Works
+
+The pipeline follows the standard encoder-decoder architecture for image captioning:
+
+1. **Feature extraction (encoder):** Each image is passed through **Xception**, a
+   convolutional neural network pretrained on **ImageNet**, to extract a fixed-length
+   feature vector capturing the image's visual content.
+2. **Caption generation (decoder):** The extracted image features are fed into an
+   **LSTM** network, which generates a sequence of English words one at a time,
+   conditioned on both the image features and the words generated so far, producing a
+   coherent caption.
+
+```
+Image → Xception (CNN, ImageNet-pretrained) → feature vector → LSTM → caption
+```
+
+## Requirements
+
+```
+tensorflow / keras
+numpy
+pillow
+nltk  (for caption evaluation, if used)
+```
+
+## Usage
+
+1. Extract image features using the pretrained Xception model.
+2. Train the LSTM decoder on the extracted features paired with ground-truth captions.
+3. Run inference on a new image to generate a caption.
